@@ -6,6 +6,8 @@ transformers==4.35.2
 huggingface-hub==0.20.3
 pinecone-client==3.0.0
 langchain==0.1.14
+langchain-community==0.0.17   
+langchain-core==0.1.41 
 ollama==0.1.9
 fastapi==0.110.2
 uvicorn==0.29.0

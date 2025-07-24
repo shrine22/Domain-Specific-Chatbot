@@ -1,0 +1,20 @@
+# Environment variables
+.env
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Virtual environment
+chatbot_env/
+.venv/ # In case you used .venv
+env/   # Common name for virtual envs
+
+# Specific generated files
+cleaned_website_content.json
+embedded_content.json
+
+# Docker related build artifacts
+# (If you had built images or run containers, these might be created by Docker)
+*.dockerignore
+.docker

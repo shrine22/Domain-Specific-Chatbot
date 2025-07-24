@@ -1,0 +1,12 @@
+beautifulsoup4==4.12.3
+requests==2.31.0
+python-dotenv==1.0.1
+sentence-transformers==2.2.2
+transformers==4.35.2
+huggingface-hub==0.20.3
+pinecone-client==3.0.0
+langchain==0.1.14
+ollama==0.1.9
+fastapi==0.110.2
+uvicorn==0.29.0
+streamlit==1.36.0

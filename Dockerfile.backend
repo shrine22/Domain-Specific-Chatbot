@@ -1,0 +1,32 @@
+# Dockerfile.backend
+
+# Use a specific Python base image that matches your development environment (Python 3.11)
+FROM python:3.11-slim-buster
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy only the requirements file first to leverage Docker's build cache
+# If requirements.txt doesn't change, this layer won't rebuild
+COPY requirements.txt .
+
+# Install Python dependencies
+# --no-cache-dir: Reduces image size by not storing build cache
+# --upgrade pip: Ensures pip is up-to-date
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your application code into the container
+# This includes api.py, chatbot_rag.py, db_manager.py, embedder.py, scrape.py, etc.
+# IMPORTANT: Do NOT copy .env file into the image for production.
+# Environment variables should be injected at runtime by the cloud platform.
+COPY . .
+
+# Expose the port that FastAPI will run on
+EXPOSE 8000
+
+# Command to run the application using Uvicorn
+# We use the --host 0.0.0.0 to make it accessible from outside the container
+# --port 8000 matches the EXPOSE instruction
+# We remove --reload for production deployments as it's for development
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]

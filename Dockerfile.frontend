@@ -1,0 +1,24 @@
+# Dockerfile.frontend
+
+# Use a specific Python base image
+FROM python:3.11-slim-buster
+
+# Set the working directory
+WORKDIR /app
+
+# Copy requirements.txt and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy the Streamlit application and other necessary files
+# (e.g., if you had any local assets, images, etc.)
+COPY . .
+
+# Expose the default Streamlit port
+EXPOSE 8501
+
+# Command to run the Streamlit application
+# We need to specify the backend URL as an environment variable
+# This will be injected at runtime when deploying to the cloud
+CMD ["streamlit", "run", "streamlit_app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
